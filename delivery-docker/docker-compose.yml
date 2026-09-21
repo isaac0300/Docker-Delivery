@@ -1,0 +1,37 @@
+services:
+ 
+  front:
+    build: ./frontend
+    container_name: front-delivery
+    ports:
+      - "8083:80"
+    networks:
+      - rede-delivery
+  back:
+    build: ./backend
+    container_name: back-delivery
+    ports:
+      - "3003:3000"
+    networks:
+      - rede-delivery
+    depends_on:
+      - banco
+  banco:
+    image: mysql:8.0
+    container_name: banco-delivery
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: delivery
+    volumes:
+      - dados_delivery:/var/lib/mysql
+      - ./banco/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - rede-delivery
+ 
+networks:
+ 
+   rede-delivery:
+ 
+volumes:
+ 
+  dados_delivery:

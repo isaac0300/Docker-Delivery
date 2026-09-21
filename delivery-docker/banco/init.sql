@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS delivery;
+
+USE delivery;
+
+CREATE TABLE IF NOT EXISTS pedidos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cliente VARCHAR(255) NOT NULL,
+    item VARCHAR(255) NOT NULL,
+    endereco VARCHAR(255),
+    status VARCHAR(50) DEFAULT 'recebido'
+);
